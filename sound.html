@@ -15,30 +15,21 @@
 
 
 <script>
+
+
+
 const REAL_TIME_FREQUENCY = 440;
-const ANGULAR_FREQUENCY = REAL_TIME_FREQUENCY * 2 * Math.PI;
-
 let audioContext = new AudioContext();
-let myBuffer = audioContext.createBuffer(1, 88200, 44100);
-let myArray = myBuffer.getChannelData(0);
-for (let sampleNumber = 0 ; sampleNumber < 88200 ; sampleNumber++) {
-  myArray[sampleNumber] = generateSample(sampleNumber);
-}
 
-function generateSample(sampleNumber) {
-  let currentTime = sampleNumber / 44100;
-  let currentAngle = currentTime * ANGULAR_FREQUENCY;
-  return Math.sin(currentAngle);
-}
+// function play() {
+  let myOscillator = audioContext.createOscillator();
+  myOscillator.frequency.value = REAL_TIME_FREQUENCY;
+  myOscillator.connect(audioContext.destination);
+  myOscillator.start();
+  myOscillator.stop(audioContext.currentTime + 2); // Stop after two seconds
+// }
 
-let src = audioContext.createBufferSource(); //ask audiocontext manager to begin
-// let src = audioContext.createBufferSource();
-src.buffer = myBuffer; //sound source to work with
-src.connect(audioContext.destination); //sends to sound card, makes it audible. 
-/*
-This will cause the signal to be sent them over to your sound card's digital-to-analog converter, and from there as an analog audio signal to your speakers.
- */
-src.start(); //Play it
+// document.body.onclick = play;
 </script> 
 
 </body> 
