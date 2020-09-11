@@ -15,38 +15,26 @@
 
 
 <script>
+const REAL_TIME_FREQUENCY = 440;
+const ANGULAR_FREQUENCY = REAL_TIME_FREQUENCY * 2 * Math.PI;
 
-const find = (selector) => document.querySelector(selector);
-const audioObject = find("#myAudio");
-
-
-function handleClicks(event) {
-  let target = event.target;
-  switch(true) {
-    case target.classList .contains("enable-controls"): enableControls();
-    break;
-    case target.classList .contains("disable-controls"): disableControls();
-    break;
-    case target.classList .contains("check-controls"): checkControls();
-  }
+let audioContext = new AudioContext();
+let myBuffer = audioContext.createBuffer(1, 88200, 44100);
+let myArray = myBuffer.getChannelData(0);
+for (let sampleNumber = 0 ; sampleNumber < 88200 ; sampleNumber++) {
+  myArray[sampleNumber] = generateSample(sampleNumber);
 }
 
-function enableControls() { 
-  audioObject.controls = true;
-  audioObject.load();
-} 
+function generateSample(sampleNumber) {
+  let currentTime = sampleNumber / 44100;
+  let currentAngle = currentTime * ANGULAR_FREQUENCY;
+  return Math.sin(currentAngle);
+}
 
-function disableControls() { 
-  audioObject.controls = false;
-  audioObject.load();
-} 
- 
-function checkControls() { 
-  alert(audioObject.controls);
-} 
-
-
-document.body.addEventListener("click", handleClicks);
+let src = audioContext.createBufferSource();
+src.buffer = myBuffer;
+src.connect(audioContext.destination);
+src.start();
 </script> 
 
 </body> 
