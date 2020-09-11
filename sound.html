@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+
+<audio id="myAudio" controls>
+  <source src="Anipakara.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio><br>
+
+<button class="enable-controls" type="button">Enable controls</button>
+<button class="disable-controls" type="button">Disable controls</button>
+<button class="check-controls" type="button">Check controls status</button>
+
+
+
+
+<script>
+
+const find = (selector) => document.querySelector(selector);
+const audioObject = find("#myAudio");
+
+
+function handleClicks(event) {
+  let target = event.target;
+  switch(true) {
+    case target.classList .contains("enable-controls"): enableControls();
+    break;
+    case target.classList .contains("disable-controls"): disableControls();
+    break;
+    case target.classList .contains("check-controls"): checkControls();
+  }
+}
+
+function enableControls() { 
+  audioObject.controls = true;
+  audioObject.load();
+} 
+
+function disableControls() { 
+  audioObject.controls = false;
+  audioObject.load();
+} 
+ 
+function checkControls() { 
+  alert(audioObject.controls);
+} 
+
+
+document.body.addEventListener("click", handleClicks);
+</script> 
+
+</body> 
+</html>
+
