@@ -31,10 +31,14 @@ function generateSample(sampleNumber) {
   return Math.sin(currentAngle);
 }
 
-let src = audioContext.createBufferSource();
-src.buffer = myBuffer;
-src.connect(audioContext.destination);
-src.start();
+let src = audioContext.createBufferSource(); //ask audiocontext manager to begin
+// let src = audioContext.createBufferSource();
+src.buffer = myBuffer; //sound source to work with
+src.connect(audioContext.destination); //sends to sound card, makes it audible. 
+/*
+This will cause the signal to be sent them over to your sound card's digital-to-analog converter, and from there as an analog audio signal to your speakers.
+ */
+src.start(); //Play it
 </script> 
 
 </body> 
