@@ -1,7 +1,24 @@
 <!DOCTYPE html> 
 <html> 
-<body> 
+<head>
+  <style>
+    body {
+      height: 100vh;
+      width: 100vh;
+      background-color: #cfcfcf;
+    }
+    h1 {
+      display: inline-block;
+      position: absolute;
+      right: 40vw;
+      bottom: 60vh;
+      color: #fefefe;
 
+    }
+  </style>
+</head>
+<body> 
+<h1>Click somewhere on the document</h1>
 <audio id="myAudio" controls>
   <source src="Anipakara.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
@@ -21,15 +38,15 @@
 const REAL_TIME_FREQUENCY = 440;
 let audioContext = new AudioContext();
 
-// function play() {
+function play() {
   let myOscillator = audioContext.createOscillator();
   myOscillator.frequency.value = REAL_TIME_FREQUENCY;
   myOscillator.connect(audioContext.destination);
   myOscillator.start();
   myOscillator.stop(audioContext.currentTime + 2); // Stop after two seconds
-// }
+}
 
-// document.body.onclick = play;
+document.addEventListener("click", play, true); //Click on the body area to hear a sharp sound for two second
 </script> 
 
 </body> 
