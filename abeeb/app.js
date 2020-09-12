@@ -15,8 +15,6 @@ stopContainer.addEventListener("click", () => {
 });
 
 function startOscillator(frequency) {
-  //   Create oscillatorNode
-
   // Create sound source
   oscillator = context.createOscillator();
   // sine wave
