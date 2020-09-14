@@ -13,40 +13,94 @@
       right: 40vw;
       bottom: 60vh;
       color: #fefefe;
+      color: crimson;
 
+    }
+    h1:hover {
+      color: #a00000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body> 
-<h1>Click somewhere on the document</h1>
-<audio id="myAudio" controls>
+<!-- <h1>Click somewhere on the document</h1> -->
+<h1 class="crank">Click me to play sound for two seconds</h1>
+<audio id="sound" controls data-playing="false">
   <source src="Anipakara.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio><br>
 
-<button class="enable-controls" type="button">Enable controls</button>
-<button class="disable-controls" type="button">Disable controls</button>
-<button class="check-controls" type="button">Check controls status</button>
+<button class="auto-generated" type="button">Auto-generated</button>
+<button class="embedded" type="button">Embedded</button>
+<button disabled class="streamed" type="button">Streamed</button>
 
 
 
 
 <script>
+!(function(w, d){
 
 
-
+const find = (selector, multiple=false) => {
+  return multiple ?  [].slice.call(d.querySelectorAll(selector)) : d.querySelectorAll(selector)[0];
+};
+const sound = find("#sound");
 const REAL_TIME_FREQUENCY = 440;
-let audioContext = new AudioContext();
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioContext = new AudioContext();
 
-function play() {
+function Play(sound, sount_type) {
+  switch(sount_type){
+    case "embedded":
+    track = audioContext.createMediaElementSource(audioElement)
+    break;
+    case "streamed": 
+    break
+    case "auto-generated":
+    break;
+  }
+
   let myOscillator = audioContext.createOscillator();
+  w.osc = myOscillator;
+  w.osc_dom = find("#sound");
   myOscillator.frequency.value = REAL_TIME_FREQUENCY;
   myOscillator.connect(audioContext.destination);
   myOscillator.start();
-  myOscillator.stop(audioContext.currentTime + 2); // Stop after two seconds
+  myOscillator.stop(audioContext.currentTime + .2); // Stop after two seconds
 }
 
-document.addEventListener("click", play, true); //Click on the body area to hear a sharp sound for two second
+function mute(gainNode) {
+  gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+}
+
+  function Play_embedded() {
+    const track = audioContext.createMediaElementSource(audioElement);
+    track.connect(audioContext.destination);
+    // check if context is in suspended state (autoplay policy)
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
+    // play or pause track depending on state
+    if (this.dataset.playing === 'false') {
+        audioElement.play();
+        this.dataset.playing = 'true';
+    } else if (this.dataset.playing === 'true') {
+        audioElement.pause();
+        this.dataset.playing = 'false';
+    }
+
+  }
+
+  function Play_streamed(stream) {
+     source = audioContext.createMediaStreamSource(stream);
+  }
+
+
+find(".crank").addEventListener("click", Play, true); //Click on the body area to hear a sharp sound for two second
+find(".embedded").addEventListener("click", Play_embedded, true); //Click on the body area to hear a sharp sound for two second
+
+}(window, document));
 </script> 
 
 </body> 
