@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Helvetica, serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+}
+
+canvas {
+    display: block;
+}
+
+div #canv {
+	display: block;
+	margin: auto;
+	background-color: #1a1a1a;
+	color: #dddddd;
+	text-align: center;
+	width: 1000px;
+	height: 300px;
+}
+
+div #inp_sec {
+	margin-top: 20px;
+}
+
+.row {
+    margin-top: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.rs-handle {
+	background-color: #f3f3f3;
+	box-shadow: 0px 0px 4px 0px #000;
+}
+.rs-tooltip-text {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#gain, #filter {
+    margin: auto;
+}

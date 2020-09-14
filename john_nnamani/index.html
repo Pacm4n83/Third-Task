@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sound Control</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/roundslider.min.css" rel="stylesheet">
+        <link href="css/oscilloscope.css" rel="stylesheet">
+        <link href="css/mystyle.css" rel="stylesheet">
+
+        <script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+        <script src="js/roundslider.min.js" type="text/javascript"></script>
+        <script src="js/oscilloscope.umd.js" type="text/javascript"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+    </head>
+<body>
+    <div class="container">
+        <h1 class="text-center">SOUND PLAYER</h1>
+        <div id="canv"></div>
+        <div id="inp_sec" class="row">
+            <div class="col-sm-9">
+                <input id="upload_files" class="form-control" type="file" accept="audio/*">
+            </div>
+            <div class="col-sm-3">
+                <button id="load" class="btn btn-success">Load Sound</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Volume</h3>
+                <div id="gain"></div>
+            </div>
+            <div class="col-sm-6">
+                <h3>Frequency</h3>
+                <div id="filter"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var gainNode;
+    var filter;
+
+    $("#gain").roundSlider({
+        svgMode: true,
+        value: 100,
+        max: 200,
+        change: change_gain
+    });
+    $("#filter").roundSlider({
+        svgMode: true,
+        value: 400,
+        max: 1000,
+        change: change_freq
+    });
+
+    function change_gain(e) {
+        if (gainNode) {
+            gainNode.gain.value = e.value / 100
+        }
+    }
+
+    function change_freq(e) {
+        if (filter) {
+            filter.frequency.value = e.value
+        }
+    }
+
+    document.querySelector('#load').addEventListener('click', function() {
+        startExample();
+    })
+</script>
+</body>
+</html>
