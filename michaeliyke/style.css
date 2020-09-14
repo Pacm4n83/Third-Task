@@ -1,0 +1,39 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #cfcfcf;
+    height: 100vh;
+    width: 100vh;
+}
+div.controls {
+    padding: 1em;
+}
+#playButton{
+    cursor: pointer;
+    color: #cyan;
+}
+p {
+    color: #810000;
+    font-weight: bold;
+}
+div.container {
+    width: 402px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #3e7e99;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 1px 4px;
+    left: 23vw;
+    margin: 0 auto;
+    padding: 2em;
+    position: relative;
+    top: 30vh;
+    background-color: #dedede;
+}
