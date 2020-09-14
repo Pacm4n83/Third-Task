@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid-container {
+            display: grid;
+            justify-content: space-evenly;
+            width: 50%;
+            margin: auto;
+            grid-template-columns: auto auto auto; 
+            grid-gap: 10px;
+            background-color: aquamarine;
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        .grid-container2 {
+            display: grid;
+            justify-content: space-evenly;
+            width: 50%;
+            margin: auto;
+            grid-template-columns: auto auto auto;
+            grid-gap: 10px;
+            background-color: rgb(87, 238, 188);
+            padding: 10px;
+        }
+
+        .grid-container3 {
+            display: grid;
+            justify-content: space-evenly;
+            width: 50%;
+            margin: auto;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+            background-color: rgb(15, 235, 161);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+        <label for="oscil1">Oscillator 1:</label>
+        <input type="range" id="oscil1" name="oscil1" min="0" max="1000" value="50" step="50">
+        <span id="fig1">50</span>
+    </div>
+
+    <div class="grid-container2">
+        <label for="oscil2">Oscillator 2:</label>
+        <input type="range" id="oscil2" name="oscil2" min="0" max="1000">
+        <span id="fig2" value="440" step="40">440</span>
+    </div>
+
+    <div class="grid-container3">
+        <button id='play'>Play</button>
+        <button id='stop' disabled>Stop</button>
+    </div>
+
+    <script>
+        //create Audiocontext
+        const context = new AudioContext();
+
+        document.querySelector("#play").addEventListener("mousedown", function() {
+            let osc = context.createOscillator();
+            osc.frequency.value = 440;
+            osc.connect(context.destination);
+            osc.start(0);
+
+            let gain = context.createGain();
+            gain.gain.value = 100;
+            gain.connect(osc.frequency);
+
+            let osc2 = context.createOscillator();
+            osc2.type = "square";
+            /* osc2.frequency.value = 1; */
+            osc2.frequency.value = 50;
+            osc2.connect(gain);
+            osc2.start(0);
+
+            document.getElementById("stop").disabled = false;
+            document.getElementById("play").disabled = true;
+
+            document.getElementById("oscil1").addEventListener("input", function() {
+                document.getElementById("fig1").innerHTML = document.getElementById("oscil1").value;
+                osc2.frequency.value = document.getElementById("oscil1").value;
+            });
+
+            document.getElementById("oscil2").addEventListener("input", function() {
+                document.getElementById("fig2").innerHTML = document.getElementById("oscil2").value;
+                osc.frequency.value = document.getElementById("oscil2").value;
+            });
+
+            document.querySelector("#stop").addEventListener("mousedown", function() {
+                osc.stop(0);
+                osc.disconnect(context.destination);
+                gain.disconnect(osc.frequency);
+                osc2.disconnect(gain);
+                osc2.stop(0);
+
+                document.getElementById("stop").disabled = true;
+                document.getElementById("play").disabled = false;
+            });
+
+        });
+    </script>
+ 
+</body>
+</html>
