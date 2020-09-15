@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Travis Kemkeu | SSG Coding Hands Dirty Task 3" />
+        <meta name="author" content="Travis Kemkeu" />
+        <title>Synchronizer</title>
+        <link rel="stylesheet" type="text/css" href="app.css" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1> Voice Oscillator Viewer</h1>
+                <div>Run </div>
+            </header>
+            <main>
+                <section
+                    <canvas  class="visualizer" width="640" height="300" style="border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        margin-bottom: -3px; box-shadow: 0 -2px 4px rgba(0,0,0,0.7),
+                        0 3px 4px rgba(0,0,0,0.7);">
+                    </canvas>
+                   
+
+                </section>
+                
+                                
+                <section
+                    <form class="controls">
+                        <div>
+                            <label for="voice">Voice Setting</label>
+                            <select id="voice" name="voice">
+                                <option value="distortion">Distortion</option>
+                                <option value="convolver">Reverb</option>
+                                <option value="biquad">Bass Boost</option>
+                                <option value="off" selected>Off</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="visual"> Visualizer Setting</label>
+                            <select id="visual" name="visual">
+                                <option value="sineware">Sineware</option>
+                                <option value="frequencybars" selected> Frequency Bars</option>
+                                <option value="off">Off</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="mute" id="mute">Mute</button>
+                        </div>
+                    </form>
+                </section>
+            </main>
+
+       
+        </div>
+            <script src="app.js"></script>
+
+        <footer>
+            <p>All rights reserved 2020</p>
+        </footer>
+
+    </body>
+</html>
